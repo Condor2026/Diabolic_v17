@@ -1,11 +1,14 @@
-# 🔥 DIABOLIC - OSINT Tool para Baleares
+## 🔥 DIABOLIC v5.1 - OSINT Tool para Baleares
 
-[![Version](https://img.shields.io/badge/version-5.1-red)](https://github.com/Condor2026/Diabolic_v17.py)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+![Version](https://img.shields.io/badge/version-5.1-red)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
-Herramienta que analiza 18 periódicos de Baleares para detectar patrones delictivos.
+Herramienta que analiza **18 periódicos de Baleares** para detectar patrones delictivos (robos, estafas, narcotráfico…) con visualización web.  
+100% legal, detector automático de URLs y conexiones entre incidentes.  
+Código abierto, transparente y con filosofía Spiderman: *"Un gran poder conlleva una gran responsabilidad"*.
 
 ## 🚀 Instalación rápida
+
 ```bash
 git clone https://github.com/Condor2026/Diabolic_v17
 cd Diabolic_v17
