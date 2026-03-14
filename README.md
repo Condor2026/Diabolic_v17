@@ -7,7 +7,7 @@ Herramienta que analiza 18 periódicos de Baleares para detectar patrones delict
 
 ## 🚀 Instalación rápida
 ```bash
-git clone https://github.com/tuusuario/DIABOLIC
+git clone https://github.com/Condor2026/Diabolic_v17.py
 cd DIABOLIC
 pip install -r requirements.txt
-python diabolic_v51.py
+python Diabolic_v17.py
