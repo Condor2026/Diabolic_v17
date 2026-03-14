@@ -89,42 +89,43 @@ def cprint(texto, color=None, negrita=False, subrayado=False, parpadeo=False, fo
 # CONFIGURACIÓN - URLs CORREGIDAS 2025 (18 PERIÓDICOS)
 # ============================================
 
-VERSION = "5.1"  # <-- ACTUALIZADO
+VERSION = "5.1"
 PUERTO = 5013
-ARCHIVO = 'diabolic_v51.json'  # <-- ACTUALIZADO
+ARCHIVO = 'diabolic_v51.json'
 ARCHIVO_ESTADO = 'estado_periodicos.json'
 PAGINAS_BUSQUEDA = 10
+TIEMPO_ESPERA = 1.5  # Segundos entre peticiones (evita bloqueos)
 
 # Periódicos de Baleares - TODOS VERIFICADOS MANUALMENTE (18 activos)
 PERIODICOS_BASE = [
     # MALLORCA (8)
     {'nombre': 'Diario de Mallorca', 'url': 'https://www.diariodemallorca.es/sucesos/', 'base': 'https://www.diariodemallorca.es', 'zona': 'Mallorca', 'activo': True},
     {'nombre': 'Última Hora', 'url': 'https://www.ultimahora.es/sucesos.html', 'base': 'https://www.ultimahora.es', 'zona': 'Mallorca', 'activo': True},
-    {'nombre': 'Mallorca Diario', 'url': 'https://www.mallorcadiario.com/categoria/sucesos', 'base': 'https://www.mallorcadiario.com', 'zona': 'Mallorca', 'activo': True},  # CORREGIDO
-    {'nombre': 'Crónica Balear', 'url': 'https://www.cronicabalear.es/sucesos/', 'base': 'https://www.cronicabalear.es', 'zona': 'Mallorca', 'activo': True},  # CORREGIDO
+    {'nombre': 'Mallorca Diario', 'url': 'https://www.mallorcadiario.com/categoria/sucesos', 'base': 'https://www.mallorcadiario.com', 'zona': 'Mallorca', 'activo': True},
+    {'nombre': 'Crónica Balear', 'url': 'https://www.cronicabalear.es/sucesos/', 'base': 'https://www.cronicabalear.es', 'zona': 'Mallorca', 'activo': True},
     {'nombre': 'Noticias Mallorca', 'url': 'https://noticiasmallorca.es/category/sucesos/', 'base': 'https://noticiasmallorca.es', 'zona': 'Mallorca', 'activo': True},
     {'nombre': 'Mallorca Confidencial', 'url': 'https://mallorcaconfidencial.com/categoria/sucesos/', 'base': 'https://mallorcaconfidencial.com', 'zona': 'Mallorca', 'activo': True},
     {'nombre': 'El Mundo - Baleares', 'url': 'https://www.elmundo.es/baleares.html', 'base': 'https://www.elmundo.es', 'zona': 'Mallorca', 'activo': True},
     {'nombre': 'El País - Baleares', 'url': 'https://elpais.com/espana/baleares/', 'base': 'https://elpais.com', 'zona': 'Mallorca', 'activo': True},
 
-    # MENORCA (4) - CORREGIDAS
-    {'nombre': 'Menorca Info', 'url': 'https://www.menorca.info/sucesos/', 'base': 'https://www.menorca.info', 'zona': 'Menorca', 'activo': True},  # CORREGIDO
+    # MENORCA (4)
+    {'nombre': 'Menorca Info', 'url': 'https://www.menorca.info/sucesos/', 'base': 'https://www.menorca.info', 'zona': 'Menorca', 'activo': True},
     {'nombre': 'Menorca Al Día', 'url': 'https://menorcaaldia.com/category/successos/', 'base': 'https://menorcaaldia.com', 'zona': 'Menorca', 'activo': True},
-    {'nombre': 'Es Diari Menorca', 'url': 'https://www.esdiari.cat/successos/', 'base': 'https://www.esdiari.cat', 'zona': 'Menorca', 'activo': True},  # CORREGIDO (.cat)
-    {'nombre': 'Menorca Esportiu', 'url': 'https://menorcaesportiu.com/successos/', 'base': 'https://menorcaesportiu.com', 'zona': 'Menorca', 'activo': True},  # CORREGIDO
+    {'nombre': 'Es Diari Menorca', 'url': 'https://www.esdiari.cat/successos/', 'base': 'https://www.esdiari.cat', 'zona': 'Menorca', 'activo': True},
+    {'nombre': 'Menorca Esportiu', 'url': 'https://menorcaesportiu.com/successos/', 'base': 'https://menorcaesportiu.com', 'zona': 'Menorca', 'activo': True},
 
-    # IBIZA (4) - INCLUYE LA VOZ DE IBIZA
+    # IBIZA (4)
     {'nombre': 'Diario de Ibiza', 'url': 'https://www.diariodeibiza.es/sucesos/', 'base': 'https://www.diariodeibiza.es', 'zona': 'Ibiza', 'activo': True},
-    {'nombre': 'Periódico de Ibiza', 'url': 'https://www.periodicodeibiza.es/', 'base': 'https://www.periodicodeibiza.es', 'zona': 'Ibiza', 'activo': True},  # CORREGIDO (portada)
+    {'nombre': 'Periódico de Ibiza', 'url': 'https://www.periodicodeibiza.es/', 'base': 'https://www.periodicodeibiza.es', 'zona': 'Ibiza', 'activo': True},
     {'nombre': 'Noudiari', 'url': 'https://www.noudiari.es/categoria/successos/', 'base': 'https://www.noudiari.es', 'zona': 'Ibiza', 'activo': True},
-    {'nombre': 'La Voz de Ibiza', 'url': 'https://lavozdeibiza.com/', 'base': 'https://lavozdeibiza.com', 'zona': 'Ibiza', 'activo': True},  # NUEVA
+    {'nombre': 'La Voz de Ibiza', 'url': 'https://lavozdeibiza.com/', 'base': 'https://lavozdeibiza.com', 'zona': 'Ibiza', 'activo': True},
 
-    # FORMENTERA (2) - CORREGIDAS (.cat)
-    {'nombre': 'Formentera Avui', 'url': 'https://www.formenteraavui.cat/successos/', 'base': 'https://www.formenteraavui.cat', 'zona': 'Formentera', 'activo': True},  # CORREGIDO
-    {'nombre': 'Formentera Digital', 'url': 'https://formenteradigital.cat/successos/', 'base': 'https://formenteradigital.cat', 'zona': 'Formentera', 'activo': True},  # CORREGIDO
+    # FORMENTERA (2)
+    {'nombre': 'Formentera Avui', 'url': 'https://www.formenteraavui.cat/successos/', 'base': 'https://www.formenteraavui.cat', 'zona': 'Formentera', 'activo': True},
+    {'nombre': 'Formentera Digital', 'url': 'https://formenteradigital.cat/successos/', 'base': 'https://formenteradigital.cat', 'zona': 'Formentera', 'activo': True},
 ]
 
-# Palabras clave de delitos (ampliado con jerga local)
+# Palabras clave de delitos
 DELITOS = [
     'robo', 'robos', 'ladrón', 'ladrones', 'detenido', 'detenidos',
     'estafa', 'estafas', 'violencia', 'agresión', 'narcotráfico',
@@ -132,7 +133,7 @@ DELITOS = [
     'homicidio', 'apuñalado', 'tiroteo', 'alunicero', 'butrón',
     'escalo', 'hurtos', 'hurto', 'sustrajo', 'sustrajeron',
     'peta', 'falcon', 'vuelco', 'machada', 'successos', 'sucesos',
-    'alquiler ilegal', 'intrusismo', 'multa'  # Añadido para noticias de Ibiza
+    'alquiler ilegal', 'intrusismo', 'multa'
 ]
 
 TIPOS_DELITO = {
@@ -142,7 +143,7 @@ TIPOS_DELITO = {
     'estafa': {'icono': '📄', 'color': '#8b6b00'},
     'asesinato': {'icono': '💀', 'color': '#000000'},
     'sexual': {'icono': '⚠️', 'color': '#660066'},
-    'intrusismo': {'icono': '🏠', 'color': '#cc6600'}  # Nuevo tipo para alquileres ilegales
+    'intrusismo': {'icono': '🏠', 'color': '#cc6600'}
 }
 
 ISLAS = ['Mallorca', 'Menorca', 'Ibiza', 'Formentera']
@@ -182,7 +183,7 @@ class DetectorURLs:
         if nombre in self.estado and self.estado[nombre].get('url'):
             url_guardada = self.estado[nombre]['url']
             try:
-                r = requests.get(url_guardada, timeout=3)
+                r = requests.get(url_guardada, timeout=5)
                 if r.status_code == 200:
                     return url_guardada
             except:
@@ -191,7 +192,7 @@ class DetectorURLs:
         for path in self.posibles_paths:
             url = f"{dominio}/{path}"
             try:
-                r = requests.get(url, timeout=3)
+                r = requests.get(url, timeout=5, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'})
                 if r.status_code == 200:
                     soup = BeautifulSoup(r.text, 'html.parser')
                     texto = soup.get_text().lower()
@@ -215,7 +216,7 @@ class DetectorURLs:
             cprint(f"\n📰 {p['nombre']} ", 'amarillo', negrita=True, fin='')
 
             try:
-                r = requests.get(p['url'], timeout=3)
+                r = requests.get(p['url'], timeout=5, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'})
                 if r.status_code == 200:
                     p['activo'] = True
                     cprint(f"✅ OK", 'verde')
@@ -242,7 +243,7 @@ class DetectorURLs:
                     cprint(f"❌ Error conexión", 'rojo')
 
             verificados.append(p)
-            time.sleep(0.5)
+            time.sleep(1)
 
         cprint(f"\n{'='*70}", 'verde', negrita=True)
         cprint(f"📊 ACTIVOS: {activos} de {len(periodicos)}", 'verde', negrita=True)
@@ -358,14 +359,14 @@ class GestorDatos:
         return dict(sorted(meses.items()))
 
 # ============================================
-# EXTRACTOR DE NOTICIAS
+# EXTRACTOR DE NOTICIAS (MEJORADO)
 # ============================================
 
 class ExtractorNoticias:
     def __init__(self, periodicos):
         self.periodicos = periodicos
         self.session = requests.Session()
-        self.session.headers.update({'User-Agent': 'Mozilla/5.0'})
+        self.session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'})
         self.cache_paginacion = {}
 
     def _generar_url_pagina(self, url_base, pagina):
@@ -374,17 +375,22 @@ class ExtractorNoticias:
             formato = self.cache_paginacion[dominio]
             return formato.format(pagina=pagina)
 
+        # Más formatos de paginación
         formatos = [
             f"{url_base}pagina/{{pagina}}/",
             f"{url_base}?page={{pagina}}",
             f"{url_base}{{pagina}}/",
             f"{url_base}page/{{pagina}}/",
+            f"{url_base}index.php?page={{pagina}}",
+            f"{url_base}listado?pag={{pagina}}",
+            f"{url_base}?pag={{pagina}}",
+            f"{url_base}?p={{pagina}}"
         ]
 
         for formato in formatos:
             url = formato.format(pagina=pagina)
             try:
-                r = self.session.get(url, timeout=3)
+                r = self.session.get(url, timeout=5)
                 if r.status_code == 200:
                     self.cache_paginacion[dominio] = formato
                     return url
@@ -480,7 +486,7 @@ class ExtractorNoticias:
                 except Exception as e:
                     cprint(f"✗ Error", 'rojo')
 
-                time.sleep(0.5)
+                time.sleep(TIEMPO_ESPERA)
             time.sleep(1)
 
         unicos = {}
@@ -496,7 +502,7 @@ class ExtractorNoticias:
         return list(unicos.values())
 
 # ============================================
-# HTML TEMPLATE (interactivo)
+# HTML TEMPLATE (interactivo) - (se mantiene igual)
 # ============================================
 
 HTML_TEMPLATE = '''
@@ -848,7 +854,7 @@ def menu():
         print(f"\n{Color.AMARILLO}📋 COMANDOS COMPLETOS:{Color.RESET}")
         print(f"{Color.ROJO}[1]{Color.RESET} 🔍 Buscar noticias (con detección automática de URLs)")
         print(f"{Color.ROJO}[2]{Color.RESET} 📊 Ver análisis completo")
-        print(f"{Color.ROJO}[3]{Color.RESET} 🔗 Ver conexiones entre incidentes")  # <-- AHORA SÍ FUNCIONA
+        print(f"{Color.ROJO}[3]{Color.RESET} 🔗 Ver conexiones entre incidentes")
         print(f"{Color.ROJO}[4]{Color.RESET} 📈 Ver evolución mensual")
         print(f"{Color.ROJO}[5]{Color.RESET} 🌐 Iniciar servidor web")
         print(f"{Color.ROJO}[6]{Color.RESET} 📰 Ver últimos 20 incidentes")
@@ -898,44 +904,37 @@ def menu():
             input(f"\n{Color.GRIS}Enter para continuar...{Color.RESET}")
 
         elif op == '3':
-            # ========== NUEVA OPCIÓN 3 FUNCIONAL ==========
             print(f"\n{Color.ROJO}{'═'*70}{Color.RESET}")
             print(f"{Color.AMARILLO}🔗 CONEXIONES ENTRE INCIDENTES DETECTADAS{Color.RESET}")
             print(f"{Color.ROJO}{'═'*70}{Color.RESET}")
-            
-            incidentes = gestor.datos['incidentes'][-100:]  # Últimos 100 para analizar
+
+            incidentes = gestor.datos['incidentes'][-100:]
             if len(incidentes) < 5:
                 print(f"{Color.GRIS}   Pocos incidentes para detectar patrones. Busca más noticias primero.{Color.RESET}")
                 input(f"\n{Color.GRIS}Enter...{Color.RESET}")
                 continue
 
-            # 1. Agrupar por tipo y zona en los últimos 30 días
-            from collections import defaultdict
             grupos = defaultdict(list)
             hace_30d = (datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d')
-            
+
             for inc in incidentes:
                 if inc.get('fecha', '') >= hace_30d:
                     clave = (inc.get('tipo', 'otro'), inc.get('isla', 'Desconocida'))
                     grupos[clave].append(inc)
-            
-            # Mostrar grupos con 3 o más incidentes (posibles oleadas)
+
             patrones_mostrados = 0
             for (tipo, isla), lista in grupos.items():
                 if len(lista) >= 3:
                     print(f"\n{Color.ROJO}🔥 PATRÓN: {len(lista)} {tipo.upper()} en {isla}{Color.RESET}")
-                    # Mostrar los 3 más recientes
                     for inc in sorted(lista, key=lambda x: x['fecha'], reverse=True)[:3]:
                         print(f"   • {inc['fecha']}: {inc['titulo'][:80]}...")
-                    # Calcular frecuencia
                     fechas = [inc['fecha'] for inc in lista]
                     dias = (datetime.now() - datetime.strptime(min(fechas), '%Y-%m-%d')).days if fechas else 0
                     if dias > 0:
                         freq = round(len(lista) / dias, 1)
                         print(f"   ⚡ Frecuencia: {freq} incidentes/día")
                     patrones_mostrados += 1
-            
-            # 2. Detectar posibles mismas bandas por palabras clave (modus operandi)
+
             print(f"\n{Color.AMARILLO}🔍 POSIBLES MISMAS BANDAS (modus operandi){Color.RESET}")
             palabras_modus = ['alunicero', 'butrón', 'escalo', 'tirón', 'violencia', 'estafa', 'intrusismo']
             for palabra in palabras_modus:
@@ -944,10 +943,10 @@ def menu():
                     print(f"\n   {Color.ROJO}• {palabra.upper()}: {len(relacionados)} incidentes{Color.RESET}")
                     for inc in relacionados[:3]:
                         print(f"     - {inc['fecha']} ({inc['isla']}): {inc['titulo'][:60]}...")
-            
+
             if patrones_mostrados == 0:
                 print(f"\n{Color.GRIS}   No se detectaron patrones significativos en los últimos 30 días.{Color.RESET}")
-            
+
             input(f"\n{Color.GRIS}Enter para continuar...{Color.RESET}")
 
         elif op == '4':
