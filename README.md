@@ -1,4 +1,4 @@
-## 🔥 DIABOLIC v5.1 - OSINT Tool para Baleares
+# 🔥 DIABOLIC v5.1 - OSINT Tool para Baleares
 
 ![Version](https://img.shields.io/badge/version-5.1-red)
 ![License](https://img.shields.io/badge/license-MIT-blue)
