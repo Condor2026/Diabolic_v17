@@ -14,3 +14,4 @@ git clone https://github.com/Condor2026/Diabolic_v17
 cd Diabolic_v17
 pip install -r requirements.txt
 python Diabolic_v17.py
+📌 **Importante**: antes de usar DIABOLIC, lee el [aviso legal y ético](DISCLAIMER.md).
