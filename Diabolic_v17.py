@@ -3,27 +3,39 @@
 
 """
 ================================================================================
-🔥 DIABOLIC v5.3 - ANÁLISIS DE PATRONES DELICTIVOS EN BALEARES 🔥
+🔥 DIABOLIC BALEARES v5.3 - OSINT ANALYTICS PLATFORM
 ================================================================================
-🕷️  "Un gran poder conlleva una gran responsabilidad" - Spiderman
+📊 Análisis automatizado de patrones delictivos en las Islas Baleares
 ================================================================================
-LEGALIDAD Y ÉTICA:
-• Esta herramienta trabaja EXCLUSIVAMENTE con datos públicos (noticias digitales).
-• No almacena ni procesa información personal de ningún tipo.
-• Su objetivo es la prevención, el periodismo de datos y la investigación social.
-• El usuario es el único responsable de hacer un uso ético y legal de la misma.
-• Se desaconseja rotundamente cualquier modificación que pueda vulnerar derechos,
-  realizar vigilancia masiva, perfilar personas o incurrir en actividades ilegales.
-• Si se añaden nuevas fuentes, debe hacerse respetando siempre los términos de uso
-  de los sitios web y la legislación vigente (especialmente protección de datos).
+🎯 PROPÓSITO:
+    Herramienta OSINT de código abierto que monitoriza 18 periódicos digitales
+    de Mallorca, Menorca, Ibiza y Formentera para detectar, clasificar y
+    visualizar tendencias delictivas.
 
-🔍 Fuentes: 18 periódicos de Mallorca, Menorca, Ibiza y Formentera.
-📊 Funcionalidad: Detección automática de URLs, paginación inteligente,
-   análisis de patrones, web interactiva, exportación de datos,
-   y NUEVA opción 3: Conexiones entre incidentes.
-⚖️  Transparencia: Código abierto, sin datos personales, solo noticias públicas.
+⚙️  FUNCIONALIDADES CLAVE:
+    • Scraping inteligente con detección automática de URLs
+    • Rotación de User-Agent para evitar bloqueos
+    • Clasificación de delitos (robos, estafas, narcotráfico, violencia...)
+    • Detección de patrones y conexiones entre incidentes
+    • Visualización web interactiva con gráficos dinámicos
+    • Exportación de datos (JSON/CSV)
+    • Menú terminal con 10 comandos avanzados
 
-Desarrollado por SpectrumSecurity
+🔐 PRINCIPIOS ÉTICOS:
+    • 100% datos públicos (solo noticias digitales)
+    • Cero almacenamiento de información personal
+    • Transparencia total (código abierto y auditable)
+    • Filosofía: "Un gran poder conlleva una gran responsabilidad"
+
+📈 APLICACIONES:
+    • Periodismo de datos · Criminología · Prevención ciudadana
+    • Asociaciones vecinales · Investigación social
+
+⚖️  LEGALIDAD:
+    Cumple con RGPD/LOPDGDD al no tratar datos personales.
+    El usuario es el único responsable del uso de la herramienta.
+
+Desarrollado por SpectrumSecurity · https://github.com/Condor2026/Diabolic_v17
 ================================================================================
 """
 
@@ -32,6 +44,7 @@ import sys
 import time
 import json
 import hashlib
+import random
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
@@ -86,17 +99,17 @@ def cprint(texto, color=None, negrita=False, subrayado=False, parpadeo=False, fo
     print(f"{fondo_color}{neg}{sub}{parp}{col}{texto}{Color.RESET}", end=fin)
 
 # ============================================
-# CONFIGURACIÓN - URLs CORREGIDAS 2025 (18 PERIÓDICOS)
+# CONFIGURACIÓN - Periódicos de Baleares (18 fuentes)
 # ============================================
 
-VERSION = "5.1"
+VERSION = "5.3"
 PUERTO = 5013
-ARCHIVO = 'diabolic_v51.json'
+ARCHIVO = 'diabolic_v53.json'
 ARCHIVO_ESTADO = 'estado_periodicos.json'
 PAGINAS_BUSQUEDA = 10
-TIEMPO_ESPERA = 1.5  # Segundos entre peticiones (evita bloqueos)
+TIEMPO_ESPERA = 1.5
 
-# Periódicos de Baleares - TODOS VERIFICADOS MANUALMENTE (18 activos)
+# Periódicos de Baleares - 18 activos
 PERIODICOS_BASE = [
     # MALLORCA (8)
     {'nombre': 'Diario de Mallorca', 'url': 'https://www.diariodemallorca.es/sucesos/', 'base': 'https://www.diariodemallorca.es', 'zona': 'Mallorca', 'activo': True},
@@ -125,7 +138,7 @@ PERIODICOS_BASE = [
     {'nombre': 'Formentera Digital', 'url': 'https://formenteradigital.cat/successos/', 'base': 'https://formenteradigital.cat', 'zona': 'Formentera', 'activo': True},
 ]
 
-# Palabras clave de delitos
+# Palabras clave de delitos (ampliado)
 DELITOS = [
     'robo', 'robos', 'ladrón', 'ladrones', 'detenido', 'detenidos',
     'estafa', 'estafas', 'violencia', 'agresión', 'narcotráfico',
@@ -149,7 +162,7 @@ TIPOS_DELITO = {
 ISLAS = ['Mallorca', 'Menorca', 'Ibiza', 'Formentera']
 
 # ============================================
-# DETECTOR AUTOMÁTICO DE URLs (mejorado)
+# DETECTOR AUTOMÁTICO DE URLs (MEJORADO)
 # ============================================
 
 class DetectorURLs:
@@ -160,7 +173,10 @@ class DetectorURLs:
             'sucesos', 'sucesos/', 'local', 'local/', 'noticias', 'noticias/',
             'sucesos-mallorca', 'category/sucesos/', 'categoria/sucesos/',
             'sucesos.html', 'index.php/sucesos', 'seccion/sucesos',
-            'successos', 'successos/', 'categoria/successos/', 'seccio/successos/'
+            'successos', 'successos/', 'categoria/successos/', 'seccio/successos/',
+            'tribunales', 'tribunales/', 'justicia', 'justicia/',          # NUEVOS
+            'actualidad/sucesos', 'actualidad/sucesos/',                   # NUEVOS
+            'espana/sucesos', 'espana/sucesos/'                            # NUEVOS
         ]
 
     def cargar_estado(self):
@@ -183,7 +199,7 @@ class DetectorURLs:
         if nombre in self.estado and self.estado[nombre].get('url'):
             url_guardada = self.estado[nombre]['url']
             try:
-                r = requests.get(url_guardada, timeout=5)
+                r = requests.get(url_guardada, timeout=5, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'})
                 if r.status_code == 200:
                     return url_guardada
             except:
@@ -359,14 +375,21 @@ class GestorDatos:
         return dict(sorted(meses.items()))
 
 # ============================================
-# EXTRACTOR DE NOTICIAS (MEJORADO)
+# EXTRACTOR DE NOTICIAS (MEJORADO CON ROTACIÓN DE USER-AGENT Y MÁS FORMATOS)
 # ============================================
 
 class ExtractorNoticias:
     def __init__(self, periodicos):
         self.periodicos = periodicos
         self.session = requests.Session()
-        self.session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'})
+        self.user_agents = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0'
+        ]
+        self.session.headers.update({'User-Agent': random.choice(self.user_agents)})
         self.cache_paginacion = {}
 
     def _generar_url_pagina(self, url_base, pagina):
@@ -375,7 +398,7 @@ class ExtractorNoticias:
             formato = self.cache_paginacion[dominio]
             return formato.format(pagina=pagina)
 
-        # Más formatos de paginación
+        # MÁS FORMATOS DE PAGINACIÓN (12)
         formatos = [
             f"{url_base}pagina/{{pagina}}/",
             f"{url_base}?page={{pagina}}",
@@ -384,7 +407,11 @@ class ExtractorNoticias:
             f"{url_base}index.php?page={{pagina}}",
             f"{url_base}listado?pag={{pagina}}",
             f"{url_base}?pag={{pagina}}",
-            f"{url_base}?p={{pagina}}"
+            f"{url_base}?p={{pagina}}",
+            f"{url_base}pag/{{pagina}}/",
+            f"{url_base}pagina/{{pagina}}",
+            f"{url_base}?pageNumber={{pagina}}",
+            f"{url_base}?offset={{pagina}}"
         ]
 
         for formato in formatos:
@@ -502,14 +529,14 @@ class ExtractorNoticias:
         return list(unicos.values())
 
 # ============================================
-# HTML TEMPLATE (interactivo) - (se mantiene igual)
+# HTML TEMPLATE (interactivo)
 # ============================================
 
 HTML_TEMPLATE = '''
 <!DOCTYPE html>
 <html>
 <head>
-    <title>🔥 DIABOLIC v{{ version }}</title>
+    <title>🔥 DIABOLIC BALEARES v{{ version }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -641,7 +668,7 @@ HTML_TEMPLATE = '''
 <body>
     <div class="container">
         <div class="header">
-            <h1>⚡ DIABOLIC ⚡</h1>
+            <h1>⚡ DIABOLIC BALEARES ⚡</h1>
             <div class="version-badge">v{{ version }} · Puerto {{ puerto }}</div>
             <div class="stats-header">
                 <div class="stat-header-item">📊 {{ total_incidentes }} incidentes</div>
@@ -729,7 +756,7 @@ HTML_TEMPLATE = '''
         </div>
 
         <div class="footer">
-            <p>🔥 DIABOLIC v{{ version }} · {{ periodicos_activos }} PERIÓDICOS ACTIVOS · 100% LEGAL</p>
+            <p>🔥 DIABOLIC BALEARES v{{ version }} · {{ periodicos_activos }} PERIÓDICOS ACTIVOS · 100% LEGAL</p>
             <p style="font-size:0.8em; color:#666;">"Un gran poder conlleva una gran responsabilidad" - Usa esta herramienta de forma ética.</p>
         </div>
     </div>
@@ -832,7 +859,7 @@ def exportar_csv():
 def menu():
     while True:
         print(f"\n{Color.ROJO}{'═'*90}{Color.RESET}")
-        print(f"{Color.FONDO_ROJO}{Color.NEGRITA}🔥 DIABOLIC v{VERSION} - PUERTO {PUERTO}{Color.RESET}")
+        print(f"{Color.FONDO_ROJO}{Color.NEGRITA}🔥 DIABOLIC BALEARES v{VERSION} - PUERTO {PUERTO}{Color.RESET}")
         print(f"{Color.ROJO}{'═'*90}{Color.RESET}")
 
         stats = gestor.estadisticas()
@@ -999,7 +1026,7 @@ def menu():
             input(f"\n{Color.GRIS}Enter...{Color.RESET}")
 
         elif op == '10':
-            cprint(f"\n👋 Hasta pronto, DIABOLIC se despide", 'rojo', negrita=True)
+            cprint(f"\n👋 Hasta pronto, DIABOLIC BALEARES se despide", 'rojo', negrita=True)
             break
 
         else:
@@ -1014,9 +1041,9 @@ if __name__ == '__main__':
     print(f"""
 {Color.ROJO}
 ╔══════════════════════════════════════════════════════════════════╗
-║  🔥 DIABOLIC v{VERSION} - 18 PERIÓDICOS ACTIVOS 🔥               ║
-║  ⚡ URLs 2025 MANUALMENTE Osint 100% Legal   ⚡                  ║
-║  Mallorca · Menorca · Ibiza · Formentera                         ║
+║  🔥 DIABOLIC BALEARES v{VERSION} - 18 PERIÓDICOS ACTIVOS 🔥     ║
+║  ⚡ Mallorca · Menorca · Ibiza · Formentera              ║
+║  🕷️  Rotación de User-Agent · Paginación inteligente     ║
 ║                                         - By                     ║
 ║                                            •SpectrumSecurity•    ║
 ╚══════════════════════════════════════════════════════════════════╝
