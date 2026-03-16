@@ -1,4 +1,4 @@
-# 🔥 Diabolic_v17 v5.1 - OSINT Tool para Baleares
+# 🔥 Diabolic_v17 v5.3 - OSINT Tool para Baleares
 
 [![Version](https://img.shields.io/badge/version-5.3-red)](https://github.com/Condor2026/Diabolic_v17)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
