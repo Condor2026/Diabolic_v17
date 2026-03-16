@@ -1,0 +1,7 @@
+*.pyc
+__pycache__/
+*.json
+estado_periodicos.json
+diabolic_v53.json
+export.json
+export.csv
