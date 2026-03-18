@@ -1057,11 +1057,11 @@ if __name__ == '__main__':
     print(f"""
 {Color.ROJO}
 ╔══════════════════════════════════════════════════════════════════╗
-║  🔥 DIABOLIC BALEARES v{VERSION} - 18 PERIÓDICOS ACTIVOS 🔥                  ║
-║  ⚡ Mallorca · Menorca · Ibiza · Formentera                                  ║
-║  🕷️  Rotación de User-Agent · Paginación inteligente                         ║
-║                                         - By Condor2026                      ║
-║                                            •SpectrumSecurity•                ║
+║  🔥 DIABOLIC BALEARES v{VERSION} - 18 PERIÓDICOS ACTIVOS 🔥              ║
+║  ⚡ Mallorca · Menorca · Ibiza · Formentera⚡                          ║
+║  🕷️  Rotación de User-Agent · Paginación inteligente                  ║
+║                                         - By Condor2026       👻       ║
+║                                            •SpectrumSecurity•          ║
 ╚══════════════════════════════════════════════════════════════════╝
 {Color.RESET}""")
     print(f"{Color.GRIS}🕷️  \"Un gran poder conlleva una gran responsabilidad\" - Spiderman{Color.RESET}")
