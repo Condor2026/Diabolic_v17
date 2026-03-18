@@ -529,7 +529,7 @@ class ExtractorNoticias:
         return list(unicos.values())
 
 # ============================================
-# HTML TEMPLATE (interactivo)
+# HTML TEMPLATE (interactivo + NEÓN VERDE)
 # ============================================
 
 HTML_TEMPLATE = '''
@@ -548,6 +548,22 @@ HTML_TEMPLATE = '''
             padding: 20px;
         }
         .container { max-width: 1400px; margin: 0 auto; }
+
+        /* ===== EFECTO NEÓN PARPADEANTE (VERDE) ===== */
+        @keyframes neonPulse {
+            0% { text-shadow: 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0a0, 0 0 80px #0a0, 0 0 120px #0a0; opacity: 1; }
+            100% { text-shadow: 0 0 2px #0f0, 0 0 5px #0f0, 0 0 10px #0f0, 0 0 20px #0a0, 0 0 40px #0a0, 0 0 60px #0a0; opacity: 0.9; }
+        }
+
+        .neon-header {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 4em;
+            color: #fff;
+            animation: neonPulse 1.5s infinite alternate;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
         .header {
             background: linear-gradient(135deg, #4a0000, #8b0000, #ff0000);
             padding: 40px;
@@ -556,7 +572,6 @@ HTML_TEMPLATE = '''
             margin-bottom: 30px;
             box-shadow: 0 0 40px rgba(255,0,0,0.5);
         }
-        .header h1 { font-size: 4em; text-shadow: 3px 3px 0 #4a0000; }
         .version-badge {
             background: black;
             color: #ff0000;
@@ -668,7 +683,8 @@ HTML_TEMPLATE = '''
 <body>
     <div class="container">
         <div class="header">
-            <h1>⚡ DIABOLIC BALEARES ⚡</h1>
+            <!-- TÍTULO CON EFECTO NEÓN VERDE -->
+            <h1 class="neon-header">⚡ DIABOLIC BALEARES ⚡</h1>
             <div class="version-badge">v{{ version }} · Puerto {{ puerto }}</div>
             <div class="stats-header">
                 <div class="stat-header-item">📊 {{ total_incidentes }} incidentes</div>
@@ -1041,15 +1057,17 @@ if __name__ == '__main__':
     print(f"""
 {Color.ROJO}
 ╔══════════════════════════════════════════════════════════════════╗
-║  🔥 DIABOLIC BALEARES v{VERSION} - 18 PERIÓDICOS ACTIVOS 🔥     ║
-║  ⚡ Mallorca · Menorca · Ibiza · Formentera              ║
-║  🕷️  Rotación de User-Agent · Paginación inteligente     ║
-║                                         - By                     ║
-║                                            •SpectrumSecurity•    ║
+║  🔥 DIABOLIC BALEARES v{VERSION} - 18 PERIÓDICOS ACTIVOS 🔥                  ║
+║  ⚡ Mallorca · Menorca · Ibiza · Formentera                                  ║
+║  🕷️  Rotación de User-Agent · Paginación inteligente                         ║
+║                                         - By Condor2026                      ║
+║                                            •SpectrumSecurity•                ║
 ╚══════════════════════════════════════════════════════════════════╝
 {Color.RESET}""")
     print(f"{Color.GRIS}🕷️  \"Un gran poder conlleva una gran responsabilidad\" - Spiderman{Color.RESET}")
     print(f"{Color.GRIS}⚖️  Uso ético y legal, solo datos públicos.{Color.RESET}")
+    print(f"{Color.CIAN}🔍 OSINT pasivo · 18 fuentes locales · Análisis de patrones geográficos y temporales{Color.RESET}")
+    print(f"{Color.CIAN}📊 Detecta conexiones entre incidentes y posibles bandas por modus operandi{Color.RESET}")
 
     stats = gestor.estadisticas()
     print(f"{Color.VERDE}📊 Incidentes en base: {stats['total']}{Color.RESET}")
