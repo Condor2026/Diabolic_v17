@@ -1,106 +1,88 @@
-# LYRA - Herramienta OSINT para investigadores
+# DIABOLIC Baleares v5.3
 
-[![Version](https://img.shields.io/badge/version-1.0-red)](https://github.com/tu-usuario/LYRA)
+[![Version](https://img.shields.io/badge/version-5.3-red)](https://github.com/Condor2026/Diabolic_v17)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.8+-green)](https://python.org)
 [![OSINT](https://img.shields.io/badge/OSINT-Pasivo%20%7C%20Analítico-blueviolet)](https://es.wikipedia.org/wiki/OSINT)
 [![Termux](https://img.shields.io/badge/Termux-Compatible-orange)](https://termux.com)
 [![Linux](https://img.shields.io/badge/Linux-Compatible-lightgrey)](https://linux.org)
 
-**LYRA** es una herramienta OSINT pasiva y analítica diseñada para **consultar información pública de teléfonos, emails, direcciones IP y usernames en más de 300 plataformas**, con integración opcional para análisis avanzado de riesgo (VoIP/fraude) y herramientas profesionales como Maigret o Sherlock.  
+**DIABOLIC Baleares** es una herramienta OSINT pasiva y analítica diseñada para **monitorizar automáticamente 18 periódicos digitales de las Islas Baleares**, extrayendo y procesando noticias de sucesos para detectar patrones delictivos, tendencias geográficas y conexiones entre incidentes.  
 Nace con una filosofía clara: *“Un gran poder conlleva una gran responsabilidad”*. Por eso su diseño prioriza la transparencia, la ética y el respeto a la privacidad.
 
 ---
 
 ## 📌 Índice
 
-- [¿Qué hace LYRA?](#qué-hace-lyra)
+- [¿Qué hace DIABOLIC?](#qué-hace-diabolic)
 - [Características clave](#características-clave)
 - [Tecnología y arquitectura](#tecnología-y-arquitectura)
 - [Instalación y uso](#instalación-y-uso)
 - [Modo terminal (10 comandos)](#modo-terminal-10-comandos)
-- [Configuración opcional](#configuración-opcional)
+- [Modo web interactivo](#modo-web-interactivo)
+- [Fuentes monitorizadas](#fuentes-monitorizadas)
+- [Tipo de OSINT y metodología](#tipo-de-osint-y-metodología)
 - [Ética, legalidad y protección de datos](#ética-legalidad-y-protección-de-datos)
 - [Contribuciones y futuro](#contribuciones-y-futuro)
 - [Licencia](#licencia)
 
 ---
 
-## 🔍 ¿Qué hace LYRA?
+## 🔍 ¿Qué hace DIABOLIC?
 
-LYRA automatiza la búsqueda de información pública disponible en internet, permitiendo a investigadores, periodistas y fuerzas de seguridad obtener datos relevantes sin necesidad de realizar consultas manuales repetitivas. La herramienta:
+DIABOLIC automatiza el proceso de **scraping de noticias de sucesos** de medios locales de Baleares. En lugar de leer decenas de periódicos cada día, la herramienta:
 
-- **Consulta información de teléfonos**: país, operador, tipo de línea, geolocalización aproximada, reportes de spam, scraping de Truecaller y búsqueda en Telegram.
-- **Analiza emails**: verifica si el dominio es desechable, consulta filtraciones en Have I Been Pwned y obtiene el perfil de Gravatar.
-- **Geolocaliza IPs**: muestra país, ciudad, ISP y enlace a Google Maps.
-- **Busca usernames en más de 300 plataformas**: redes sociales, foros, gaming, música, dating, crypto, etc., clasificados por categorías.
-- **Ofrece herramientas de defensa**: enlace a SpamBlocker para bloquear llamadas spam.
-- **Integra herramientas profesionales**: ejecuta Maigret (3000+ sitios) y Sherlock (300+ sitios) directamente desde LYRA.
-- **Incluye utilidades complementarias**: búsqueda inversa de imágenes, escaneo de puertos y WHOIS de dominio mejorado con registros DNS.
+- **Extrae** automáticamente titulares, fechas, fuentes y ubicaciones geográficas de noticias relacionadas con delitos.
+- **Clasifica** los incidentes en categorías (robo, estafa, narcotráfico, violencia, asesinato, intrusismo turístico, etc.).
+- **Almacena** los datos localmente en formato JSON, sin guardar ningún dato personal.
+- **Analiza** tendencias temporales (7, 30, 90 días) y distribuciones por isla y tipo de delito.
+- **Detecta conexiones** entre incidentes: misma zona, fechas cercanas, mismo modus operandi (alunicero, butrón, escalo…) que pueden indicar una misma banda.
+- **Visualiza** los resultados mediante una interfaz web interactiva con gráficos de barras y filtros dinámicos.
+- **Exporta** los datos a CSV o JSON para análisis externos.
 
 ---
 
 ## ⚙️ Características clave
 
-### 📱 Módulo Teléfono
-- **Validación y formateo** con `phonenumbers`.
-- **Geolocalización aproximada** mediante Nominatim (OpenStreetMap) con enlace a Google Maps.
-- **Análisis de riesgo VoIP/fraude** (opcional) a través de IPQualityScore.
-- **Consulta de reportes de spam** en `spamcalls.net`.
-- **Scraping de Truecaller** para obtener nombre público si está registrado.
-- **Búsqueda en Telegram** por username o número.
-- **Enlaces rápidos** a Tellows, SpamCalls, Google y Facebook.
+### 🔁 Rotación de User‑Agent
+Evita bloqueos de los periódicos simulando diferentes navegadores y versiones en cada petición.
 
-### 📧 Módulo Email
-- **Detección de dominio desechable** con lista actualizada desde GitHub.
-- **Consulta de filtraciones** en Have I Been Pwned (con manejo de error 401).
-- **Obtención de perfil Gravatar** si existe.
-- **Enlaces de búsqueda** a Google, Facebook y Twitter.
+### 🧠 Paginación inteligente
+Prueba automáticamente hasta 12 formatos diferentes de paginación (`/pagina/2`, `?page=2`, `?offset=2`, etc.) y recuerda el que funciona para cada dominio.
 
-### 🌐 Módulo IP
-- **Geolocalización** con `ipwho.is`.
-- **Enlace directo al mapa** de Google Maps.
+### 🔎 Detector automático de URLs
+Si una URL de un periódico deja de funcionar, el sistema busca rutas alternativas (`/sucesos`, `/local`, `/tribunales`, `/actualidad/sucesos`, etc.) y actualiza la configuración.
 
-### 👤 Módulo Username Masivo
-- **Más de 300 plataformas** (redes sociales, foros, desarrollo, gaming, música, video, dating, compras, crypto, perfiles, seguridad, viajes, etc.).
-- **Clasificación automática por categorías**.
-- **Progreso en tiempo real** durante el escaneo.
-- **Filtrado de falsos positivos** (páginas de error).
+### 📊 Clasificación avanzada de delitos
+Utiliza una lista amplia de palabras clave, incluyendo jerga local (peta, falcon, vuelco, alunicero, butrón, intrusismo…). Se puede extender fácilmente.
 
-### 🛡️ Módulo Defensa
-- **Spam Blocker**: proporciona el enlace para clonar e instalar la herramienta de bloqueo de llamadas spam de GitHub.
+### 🔗 Conexiones entre incidentes
+- **Por tipo y zona** (ej. 5 robos en Palma en 7 días).
+- **Por modus operandi** (detecta repetición de términos como “alunicero” o “butrón”).
+- **Frecuencia temporal** (incidentes/día).
 
-### 🔬 Módulo Herramientas Profesionales
-- **Maigret**: instalación automática y ejecución con generación de reporte HTML (3000+ sitios).
-- **Sherlock**: clonado automático, instalación de dependencias y ejecución (300+ sitios).
-- **Enlaces a frameworks OSINT**: SpiderFoot, Recon-ng, Maltego.
+### 🌐 Interfaz web interactiva
+- Gráficos de barras por isla y tipo de delito.
+- Filtros por período (últimos 7, 30, 90 días).
+- Lista de los últimos 20 incidentes.
+- Botones para actualizar datos y exportar JSON/CSV.
 
-### 🧩 Utilidades Complementarias
-- **Búsqueda inversa de imágenes**: genera enlace a Google Images.
-- **Escaneo de puertos**: detecta puertos abiertos comunes (21, 22, 23, 25, 80, 443, 8080, 3306, 3389).
-- **WHOIS mejorado**: consulta whois + registros A (DNS) con `dnspython`.
+### 🖥️ Menú terminal completo
+10 comandos que permiten ejecutar todas las funciones sin necesidad de abrir el navegador.
 
 ---
 
 ## 🛠️ Tecnología y arquitectura
 
 - **Lenguaje**: Python 3.8+
-- **Librerías principales**:
-  - `requests` – peticiones HTTP.
-  - `phonenumbers` – validación y formateo de números internacionales.
-  - `whois` – consulta WHOIS de dominios.
-  - `dnspython` – resolución de registros DNS.
-  - `socket` – escaneo de puertos.
-  - `hashlib` – cálculo de hash para Gravatar.
-- **APIs externas**:
-  - `ipwho.is` – geolocalización de IP.
-  - `spamcalls.net` – reportes de spam telefónico.
-  - `haveibeenpwned.com` – filtraciones de email.
-  - `ipqualityscore.com` – análisis VoIP/fraude (opcional, requiere clave).
-- **Scraping**:
-  - Truecaller (búsqueda pública).
-  - Plataformas de username (300+).
-- **Arquitectura modular**: cada opción del menú se implementa como una función independiente, facilitando el mantenimiento y la extensión.
+- **Framework web**: Flask (servidor ligero)
+- **Scraping**: Requests + BeautifulSoup4
+- **Almacenamiento**: JSON local (sin bases de datos externas)
+- **Estructura modular**:
+  - `DetectorURLs`: encargado de verificar y corregir URLs de periódicos.
+  - `GestorDatos`: carga, guarda y procesa los incidentes.
+  - `ExtractorNoticias`: realiza el scraping con rotación de User‑Agent y paginación inteligente.
+- **Colores en terminal**: Códigos ANSI para una experiencia visual atractiva.
 
 ---
 
@@ -110,7 +92,7 @@ LYRA automatiza la búsqueda de información pública disponible en internet, pe
 ```bash
 pkg update && pkg upgrade -y
 pkg install python git -y
-pip install requests phonenumbers whois dnspython
-git clone https://github.com/tu-usuario/LYRA.git
-cd LYRA
-python lyra.py
+pip install requests beautifulsoup4 flask
+git clone https://github.com/Condor2026/Diabolic_v17
+cd Diabolic_v17
+python Diabolic_v17.py
