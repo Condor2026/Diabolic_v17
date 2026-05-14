@@ -1,104 +1,101 @@
-DIABOLIC ITALIA v6.0
+# DIABOLIC Baleares v5.3
 
-https://img.shields.io/badge/version-6.0-red
-https://img.shields.io/badge/license-MIT-blue
-https://img.shields.io/badge/python-3.8+-green
-https://img.shields.io/badge/OSINT-Pasivo%20%7C%20Analítico-blueviolet
-https://img.shields.io/badge/Termux-Compatible-orange
-https://img.shields.io/badge/Linux-Compatible-lightgrey
+[![Version](https://img.shields.io/badge/version-5.3-red)](https://github.com/Condor2026/Diabolic_v17)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.8+-green)](https://python.org)
+[![OSINT](https://img.shields.io/badge/OSINT-Pasivo%20%7C%20Analítico-blueviolet)](https://es.wikipedia.org/wiki/OSINT)
+[![Termux](https://img.shields.io/badge/Termux-Compatible-orange)](https://termux.com)
+[![Linux](https://img.shields.io/badge/Linux-Compatible-lightgrey)](https://linux.org)
 
-DIABOLIC ITALIA es una herramienta OSINT pasiva y analítica diseñada para monitorizar automáticamente más de 70 periódicos digitales italianos (nacionales, regionales y locales), extrayendo y procesando noticias de sucesos para detectar patrones delictivos, tendencias geográficas y conexiones entre incidentes.
-
-Nace con una filosofía clara: “Un gran poder conlleva una gran responsabilidad”. Por eso su diseño prioriza la transparencia, la ética y el respeto a la privacidad.
-
----
-
-📌 Índice
-
-· ¿Qué hace DIABOLIC?
-· Características clave
-· Tecnología y arquitectura
-· Instalación y uso
-· Modo terminal (10 comandos)
-· Modo web interactivo
-· Fuentes monitorizadas
-· Tipo de OSINT y metodología
-· Ética, legalidad y protección de datos
-· Contribuciones y futuro
-· Licencia
+**DIABOLIC Baleares** es una herramienta OSINT pasiva y analítica diseñada para **monitorizar automáticamente 18 periódicos digitales de las Islas Baleares**, extrayendo y procesando noticias de sucesos para detectar patrones delictivos, tendencias geográficas y conexiones entre incidentes.  
+Nace con una filosofía clara: *“Un gran poder conlleva una gran responsabilidad”*. Por eso su diseño prioriza la transparencia, la ética y el respeto a la privacidad.
 
 ---
 
-🔍 ¿Qué hace DIABOLIC?
+## 📌 Índice
 
-DIABOLIC automatiza el proceso de scraping de noticias de sucesos de medios italianos. En lugar de leer decenas de periódicos cada día, la herramienta:
-
-· Extrae automáticamente titulares, fechas, fuentes y ubicaciones geográficas (región) de noticias relacionadas con delitos.
-· Clasifica los incidentes en categorías (furto, truffa, narcotraffico, violenza, omicidio, mafia, etc.).
-· Almacena los datos localmente en formato JSON, sin guardar ningún dato personal.
-· Analiza tendencias temporales (7, 30, 90 días) y distribuciones por región y tipo de delito.
-· Detecta conexiones entre incidentes: misma zona, fechas cercanas, mismo modus operandi (colpo, estorsione, etc.) que pueden indicar una misma organización criminal.
-· Visualiza los resultados mediante una interfaz web interactiva con gráficos de barras y filtros dinámicos.
-· Exporta los datos a CSV o JSON para análisis externos.
+- [¿Qué hace DIABOLIC?](#qué-hace-diabolic)
+- [Características clave](#características-clave)
+- [Tecnología y arquitectura](#tecnología-y-arquitectura)
+- [Instalación y uso](#instalación-y-uso)
+- [Modo terminal (10 comandos)](#modo-terminal-10-comandos)
+- [Modo web interactivo](#modo-web-interactivo)
+- [Fuentes monitorizadas](#fuentes-monitorizadas)
+- [Tipo de OSINT y metodología](#tipo-de-osint-y-metodología)
+- [Ética, legalidad y protección de datos](#ética-legalidad-y-protección-de-datos)
+- [Contribuciones y futuro](#contribuciones-y-futuro)
+- [Licencia](#licencia)
 
 ---
 
-⚙️ Características clave
+## 🔍 ¿Qué hace DIABOLIC?
 
-🔁 Rotación de User‑Agent
+DIABOLIC automatiza el proceso de **scraping de noticias de sucesos** de medios locales de Baleares. En lugar de leer decenas de periódicos cada día, la herramienta:
 
+- **Extrae** automáticamente titulares, fechas, fuentes y ubicaciones geográficas de noticias relacionadas con delitos.
+- **Clasifica** los incidentes en categorías (robo, estafa, narcotráfico, violencia, asesinato, intrusismo turístico, etc.).
+- **Almacena** los datos localmente en formato JSON, sin guardar ningún dato personal.
+- **Analiza** tendencias temporales (7, 30, 90 días) y distribuciones por isla y tipo de delito.
+- **Detecta conexiones** entre incidentes: misma zona, fechas cercanas, mismo modus operandi (alunicero, butrón, escalo…) que pueden indicar una misma banda.
+- **Visualiza** los resultados mediante una interfaz web interactiva con gráficos de barras y filtros dinámicos.
+- **Exporta** los datos a CSV o JSON para análisis externos.
+
+---
+
+## ⚙️ Características clave
+
+### 🔁 Rotación de User‑Agent
 Evita bloqueos de los periódicos simulando diferentes navegadores y versiones en cada petición.
 
-🧠 Paginación inteligente
+### 🧠 Paginación inteligente
+Prueba automáticamente hasta 12 formatos diferentes de paginación (`/pagina/2`, `?page=2`, `?offset=2`, etc.) y recuerda el que funciona para cada dominio.
 
-Prueba automáticamente hasta 12 formatos diferentes de paginación (/pagina/2, ?page=2, ?offset=2, etc.) y recuerda el que funciona para cada dominio.
+### 🔎 Detector automático de URLs
+Si una URL de un periódico deja de funcionar, el sistema busca rutas alternativas (`/sucesos`, `/local`, `/tribunales`, `/actualidad/sucesos`, etc.) y actualiza la configuración.
 
-🔎 Detector automático de URLs
+### 📊 Clasificación avanzada de delitos
+Utiliza una lista amplia de palabras clave, incluyendo jerga local (peta, falcon, vuelco, alunicero, butrón, intrusismo…). Se puede extender fácilmente.
 
-Si una URL de un periódico deja de funcionar, el sistema busca rutas alternativas (cronaca, cronache, notizie, cronaca-nera, etc.) y actualiza la configuración.
+### 🔗 Conexiones entre incidentes
+- **Por tipo y zona** (ej. 5 robos en Palma en 7 días).
+- **Por modus operandi** (detecta repetición de términos como “alunicero” o “butrón”).
+- **Frecuencia temporal** (incidentes/día).
 
-📊 Clasificación avanzada de delitos
+### 🌐 Interfaz web interactiva
+- Gráficos de barras por isla y tipo de delito.
+- Filtros por período (últimos 7, 30, 90 días).
+- Lista de los últimos 20 incidentes.
+- Botones para actualizar datos y exportar JSON/CSV.
 
-Utiliza una lista amplia de palabras clave, incluyendo jerga italiana (mafia, camorra, ndrangheta, estorsione, spaccio, etc.). Se puede extender fácilmente.
-
-🔗 Conexiones entre incidentes
-
-· Por tipo y región (ej. 5 furti in Lombardia in 7 giorni).
-· Por modus operandi (detecta repetición de términos como “colpo” o “estorsione”).
-· Frecuencia temporal (incidenti/giorno).
-
-🌐 Interfaz web interactiva
-
-· Gráficos de barras por región y tipo de delito.
-· Filtros por período (últimos 7, 30, 90 giorni).
-· Lista de los últimos 20 incidentes.
-· Botones para actualizar datos y exportar JSON/CSV.
-
-🖥️ Menú terminal completo
-
+### 🖥️ Menú terminal completo
 10 comandos que permiten ejecutar todas las funciones sin necesidad de abrir el navegador.
 
 ---
 
-🛠️ Tecnología y arquitectura
+## 🛠️ Tecnología y arquitectura
 
-· Lenguaje: Python 3.8+
-· Framework web: Flask (servidor ligero)
-· Scraping: Requests + BeautifulSoup4
-· Almacenamiento: JSON local (sin bases de datos externas)
-· Estructura modular:
-  · DetectorURLs: encargado de verificar y corregir URLs de periódicos.
-  · GestorDatos: carga, guarda y procesa los incidentes.
-  · ExtractorNoticias: realiza el scraping con rotación de User‑Agent y paginación inteligente.
-· Colores en terminal: Códigos ANSI para una experiencia visual atractiva.
+- **Lenguaje**: Python 3.8+
+- **Framework web**: Flask (servidor ligero)
+- **Scraping**: Requests + BeautifulSoup4
+- **Almacenamiento**: JSON local (sin bases de datos externas)
+- **Estructura modular**:
+  - `DetectorURLs`: encargado de verificar y corregir URLs de periódicos.
+  - `GestorDatos`: carga, guarda y procesa los incidentes.
+  - `ExtractorNoticias`: realiza el scraping con rotación de User‑Agent y paginación inteligente.
+- **Colores en terminal**: Códigos ANSI para una experiencia visual atractiva.
 
 ---
 
-📥 Instalación y uso
+## 📥 Instalación y uso
 
-En Termux (Android)
-
+### En Termux (Android)
+```bash
 pkg update && pkg upgrade -y
+pkg install python git -y
+pip install requests beautifulsoup4 flask
+git clone https://github.com/Condor2026/Diabolic_v17
+cd Diabolic_v17
+python Diabolic_v17.py
 pkg install python git -y
 pip install requests beautifulsoup4 flask
 git clone https://github.com/Condor2026/Diabolic_Italia
