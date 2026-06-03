@@ -202,11 +202,10 @@ Las contribuciones son bienvenidas. Puedes:
 
 ---
 
-📜 Licencia
+## 📜 Licencia
 
-Este proyecto está bajo la licencia MIT. Consulta el archivo LICENSE para más detalles.
-
----
+Este proyecto está bajo la **GNU General Public License v3.0 (GPLv3)**.  
+Consulta el archivo [`LICENSE`](LICENSE) para el texto completo de la licencia.
 
 🙏 Agradecimientos
 
