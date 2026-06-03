@@ -2,7 +2,7 @@
 
 [![Version](https://img.shields.io/badge/version-5.3-red)](https://github.com/Condor2026/Diabolic_v17)
 ![License](https://img.shields.io/badge/license-GPLv3-blue)
-[![Python](https://img.shields.io/badge/python-3.8+-green)](https://python.org)
+[![Python](https://img.shields.io/badge/python-3.8+-bluee)](https://python.org)
 [![OSINT](https://img.shields.io/badge/OSINT-Pasivo%20%7C%20Analítico-blueviolet)](https://es.wikipedia.org/wiki/OSINT)
 [![Termux](https://img.shields.io/badge/Termux-Compatible-orange)](https://termux.com)
 [![Linux](https://img.shields.io/badge/Linux-Compatible-lightgrey)](https://linux.org)
