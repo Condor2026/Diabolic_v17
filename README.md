@@ -1,12 +1,18 @@
 # DIABOLIC Baleares v5.3
 
 [![Version](https://img.shields.io/badge/version-5.3-red)](https://github.com/Condor2026/Diabolic_v17)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+![License](https://img.shields.io/badge/license-GPLv3-blue)
 [![Python](https://img.shields.io/badge/python-3.8+-green)](https://python.org)
 [![OSINT](https://img.shields.io/badge/OSINT-Pasivo%20%7C%20Analítico-blueviolet)](https://es.wikipedia.org/wiki/OSINT)
 [![Termux](https://img.shields.io/badge/Termux-Compatible-orange)](https://termux.com)
 [![Linux](https://img.shields.io/badge/Linux-Compatible-lightgrey)](https://linux.org)
 [![Web Scraping](https://img.shields.io/badge/Web%20Scraping-Legal-brightgreen)](https://es.wikipedia.org/wiki/Web_scraping)
+![Communities](https://img.shields.io/badge/communities-15%20CCAA-brightgreen)
+![Sources](https://img.shields.io/badge/sources-62%20periódicos-brightgreen)
+![Last Commit](https://img.shields.io/github/last-commit/Condor2026/Diabolic_v17)
+![Code Size](https://img.shields.io/github/languages/code-size/Condor2026/Diabolic_v17)
+![Stars](https://img.shields.io/github/stars/Condor2026/Diabolic_v17?style=social)
+![Forks](https://img.shields.io/github/forks/Condor2026/Diabolic_v17?style=social)
 
 **DIABOLIC Baleares** es una herramienta OSINT pasiva y analítica diseñada para **monitorizar automáticamente 18 periódicos digitales de las Islas Baleares**, extrayendo y procesando noticias de sucesos para detectar patrones delictivos, tendencias geográficas y conexiones entre incidentes.  
 Nace con una filosofía clara: *“Un gran poder conlleva una gran responsabilidad”*. Por eso su diseño prioriza la transparencia, la ética y el respeto a la privacidad.
