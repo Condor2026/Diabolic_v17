@@ -14,8 +14,10 @@
 ![Stars](https://img.shields.io/github/stars/Condor2026/Diabolic_v17?style=social)
 ![Forks](https://img.shields.io/github/forks/Condor2026/Diabolic_v17?style=social)
 
-**DIABOLIC Baleares** es una herramienta OSINT pasiva y analítica diseñada para **monitorizar automáticamente 18 periódicos digitales de las Islas Baleares**, extrayendo y procesando noticias de sucesos para detectar patrones delictivos, tendencias geográficas y conexiones entre incidentes.  
-Nace con una filosofía clara: *“Un gran poder conlleva una gran responsabilidad”*. Por eso su diseño prioriza la transparencia, la ética y el respeto a la privacidad.
+**DIABOLIC Baleares** es una herramienta OSINT pasiva y analítica diseñada para 
+**monitorizar automáticamente 18 periódicos digitales de las Islas Baleares**, extrayendo y procesando noticias de sucesos para detectar patrones delictivos, tendencias geográficas y conexiones entre incidentes.  
+Nace con una filosofía clara: *“Un gran poder conlleva una gran responsabilidad”*. 
+      Por eso su diseño prioriza la transparencia, la ética y el respeto a la privacidad.
 
 ---
 
@@ -217,3 +219,5 @@ Consulta el archivo [`LICENSE`](LICENSE) para el texto completo de la licencia.
 ⭐ ¡Si te gusta el proyecto, no olvides darle una estrella en GitHub!
 
 ```
+
+**🦅🦅🦅 Condor2026 – Threat Investigator 🦅🦅🦅**
