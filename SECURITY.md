@@ -43,4 +43,5 @@ Te pedimos que **no reveles públicamente** la vulnerabilidad hasta que hayamos 
 ---
 
 **¡Gracias por ayudar a hacer DIABOLIC más seguro!**  
-*SpectrumSecurity / Condor2026*
+
+**🦅🦅🦅 Condor2026 – Threat Investigator 🦅🦅🦅**
