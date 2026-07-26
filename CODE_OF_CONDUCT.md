@@ -114,4 +114,7 @@ Hay traducciones disponibles en [https://www.contributor-covenant.org/translatio
 
 ---
 
+**🦅🦅🦅 Condor2026 – Threat Investigator 🦅🦅🦅**
+
 **Proyecto DIABOLIC** – *OSINT ético al servicio de la ciudadanía* 🔥
+---
