@@ -90,4 +90,7 @@ Toda contribución debe respetar el [Código de Conducta](CODE_OF_CONDUCT.md) y 
 ---
 
 *Última actualización: marzo 2026*  
-**SpectrumSecurity** – *OSINT ético al servicio de la ciudadanía balear* 🔥
+
+**🦅🦅🦅 Condor2026 – Threat Investigator 🦅🦅🦅** – *OSINT ético al servicio de la ciudadanía balear* 🔥
+
+---
